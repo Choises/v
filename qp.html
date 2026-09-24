@@ -16,30 +16,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Kanit', sans-serif;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: transparent !important;
-    }
-:root {
-      --bg-gradient: linear-gradient(135deg, #0d0f12 0%, #1c222b 100%);
-      --container-gradient: linear-gradient(145deg, #14181f, #0d0f12);
+    :root {
+      --bg-color: #0d0f12;
+      --container-bg: #14181f;
       --accent-color: #00ffcc;
       --text-color: #ffffff;
       --text-muted: #8a99ad;
     }
-        body {
+
+    body {
       margin: 0;
       padding: 0;
-      background: var(--bg-gradient, linear-gradient(135deg, #0d0f12 0%, #1c222b 100%)); /* 🔥 Σύνδεση με τη JS */
+      background: var(--bg-gradient, linear-gradient(135deg, #0d0f12 0%, #1c222b 100%));
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       color: var(--text-color);
       display: flex;
@@ -49,284 +37,84 @@
       overflow: hidden;
     }
 
-        .player-container {
-      background: var(--container-gradient, linear-gradient(145deg, #14181f, #0d0f12)); /* 🔥 Σύνδεση με τη JS */
-      padding: 30px;
+    .player-container {
+      background: var(--container-gradient, linear-gradient(145deg, #14181f, #0d0f12));
+      padding: 12px 18px; /* 🔥 ΜΕΙΩΣΗ PADDING ΓΙΑ FLEXIBLE ΥΨΟΣ */
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       text-align: center;
-      width: 350px;
+      width: 92%; /* 🔥 ΓΙΝΕΤΑΙ FLEXIBLE ΣΤΟ ΠΛΑΤΟΣ */
+      max-width: 335px; /* Απόλυτη εφαρμογή σε κινητά */
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-
-
-    /* 📱  */
-    .player-card {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      max-width: 380px;
-      height: 100%;
-      background: linear-gradient(160deg, #0b132b 0%, #1c2541 100%); /* */
-      border: 2px solid #00d2ff; /* */
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9),
-                  0 0 20px rgba(0, 210, 255, 0.6),
-                  inset 0 0 10px rgba(0, 210, 255, 0.3);
-      display: flex;
-      flex-direction: column;
-      padding: 10px;
-      overflow: hidden;
-    }
-
-    /* */
-    .instagram-badge {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 6px;
-      padding: 4px 10px;
-      background: rgba(0, 210, 255, 0.08);
-      border-radius: 12px;
-      border: 1px solid rgba(0, 210, 255, 0.25);
-    }
-
-    .instagram-channel {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    /*  */
-    .cyan-glow-text {
-      color: #ffffff;
-      text-shadow: 0 0 6px #00d2ff, 0 0 12px #00d2ff;
-    }
-
-    .instagram-icon {
-      width: 22px;
-      height: 22px;
-      background: #000;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: -2px -2px 6px #00d2ff, 2px 2px 6px #3a86ff;
-      font-size: 11px;
-      color: #fff;
-    }
-
-    /*  */
-    .status-icons {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: #00d2ff;
-    }
-
-    .live-tag {
-      background: linear-gradient(45deg, #00d2ff, #3a86ff);
-      color: #fff;
-      padding: 2px 6px;
-      border-radius: 8px;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 8px rgba(0, 210, 255, 0.8);
-    }
-
-    /*  */
-    .song-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 6px;
-      padding: 6px 10px;
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 12px;
-      border: 1px solid rgba(0, 210, 255, 0.2);
-    }
-
-    .song-info-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .custom-logo {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1.5px solid #00d2ff;
-      box-shadow: 0 0 6px rgba(0, 210, 255, 0.6);
-    }
-
-    .song-info h2 {
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .song-info p {
-      font-size: 10px;
-      color: #8da9c4;
-      font-weight: 500;
-    }
-
-    /* 📊  */
-    .eq-container {
-      display: flex;
-      align-items: flex-end;
-      gap: 2px;
-      height: 16px;
-    }
-
-    .eq-bar {
-      width: 3px;
-      height: 100%;
-      background: linear-gradient(to top, #3a86ff, #00d2ff);
-      border-radius: 3px;
-      transform-origin: bottom;
-      transform: scaleY(0.2);
-      transition: transform 0.2s ease;
-    }
-
-    .eq-container.playing .eq-bar:nth-child(1) { animation: eqBounce 0.6s infinite alternate ease-in-out; }
-    .eq-container.playing .eq-bar:nth-child(2) { animation: eqBounce 0.4s infinite alternate ease-in-out 0.1s; }
-    .eq-container.playing .eq-bar:nth-child(3) { animation: eqBounce 0.7s infinite alternate ease-in-out 0.2s; }
-    .eq-container.playing .eq-bar:nth-child(4) { animation: eqBounce 0.5s infinite alternate ease-in-out 0.15s; }
-    .eq-container.playing .eq-bar:nth-child(5) { animation: eqBounce 0.8s infinite alternate ease-in-out 0.05s; }
-
-    @keyframes eqBounce {
-      0% { transform: scaleY(0.15); }
-      100% { transform: scaleY(1); }
-    }
-
-    /* 🕒 */
-    .datetime-container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
-
-    .time-display {
-      font-size: 12px;
-      font-weight: 700;
-      color: #ffffff;
-      text-shadow: 0 0 6px #00d2ff;
-      font-family: monospace;
-    }
-
-    .date-display {
-      font-size: 9px;
-      color: #8da9c4;
-    }
-
-       /* 🎬  */
     .video-display-area {
-      flex: 1;
-      position: relative;
       width: 100%;
-      min-height: 0;
-      border-radius: 14px;
+      height: 160px; /* 🔥 ΜΕΙΩΣΗ ΥΨΟΥΣ ΒΙΝΤΕΟ ΣΤΑ 160px ΓΙΑ ΝΑ ΧΩΡΑΕΙ ΠΑΝΤΟΥ */
+      position: relative;
+      margin-bottom: 8px;
+      border-radius: 10px;
       overflow: hidden;
-      margin: 4px 0 8px 0;
-      border: 1px solid rgba(0, 210, 255, 0.35);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
-      background: #050508;
+      background: transparent;
+      z-index: 1;
     }
 
-    .video-display-area video {
+    #bg-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-
-    /* Controls บาร์ควบคุม */
-    .controls {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background: rgba(11, 19, 43, 0.85);
-      padding: 8px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(0, 210, 255, 0.3);
+    #mp3-cover-box {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: center;
+      display: none;
+      z-index: 2;
     }
 
-    .progress-bar-container {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 10px;
-      color: #8da9c4;
-    }
-
-    .progress-bar {
-      flex: 1;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 5px;
-      accent-color: #00d2ff;
-      cursor: pointer;
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 8px;
-    }
-
-    .btn-control {
+    /* 🔊 Στυλ για τα Κλασικά Μεγάλα Κουμπιά */
+    .control-btn {
       background: none;
-      border: none;
-      color: #d1d5db;
-      font-size: 16px;
+      border: 2px solid var(--text-color);
+      color: var(--text-color);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
       cursor: pointer;
-      transition: 0.2s;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    /* ⚡ Στυλ για το Κεντρικό Κυκλικό Κουμπί Play (Συγχρονισμένο με το CSS σας) */
+    .btn-control {
+      background: #14181f;
+      border: 2px solid #00ffcc;
+      color: #00ffcc;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.4), inset 0 0 10px rgba(0, 255, 204, 0.2);
+      transition: all 0.3s ease;
     }
 
     .btn-control:hover {
-      color: #00d2ff;
-      transform: scale(1.15);
-      text-shadow: 0 0 8px #00d2ff;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
     }
-
-    .btn-play {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(45deg, #00d2ff, #3a86ff);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 13px;
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(0, 210, 255, 0.6);
-    }
-
-    .btn-play:hover {
-      transform: scale(1.08);
-      box-shadow: 0 4px 18px rgba(0, 210, 255, 0.9);
-    }
-#open-chat-btn { 
-    color: #00ffcc !important; 
-    text-shadow: 0 0 10px rgba(0, 255, 204, 0.8); 
-    transition: all 0.3s ease;
-}
-#open-chat-btn:hover { 
-    color: #ffffff !important;
-    text-shadow: 0 0 15px #00ffcc;
-    transform: scale(1.1); 
-}
-
   </style>
 </head>
 <body>
