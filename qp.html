@@ -16,18 +16,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg-color: #0d0f12;
-      --container-bg: #14181f;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: transparent !important;
+    }
+:root {
+      --bg-gradient: linear-gradient(135deg, #0d0f12 0%, #1c222b 100%);
+      --container-gradient: linear-gradient(145deg, #14181f, #0d0f12);
       --accent-color: #00ffcc;
       --text-color: #ffffff;
       --text-muted: #8a99ad;
     }
-
-    body {
+        body {
       margin: 0;
       padding: 0;
-      background: var(--bg-gradient, linear-gradient(135deg, #0d0f12 0%, #1c222b 100%));
+      background: var(--bg-gradient, linear-gradient(135deg, #0d0f12 0%, #1c222b 100%)); /* 🔥 Σύνδεση με τη JS */
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       color: var(--text-color);
       display: flex;
@@ -37,84 +49,286 @@
       overflow: hidden;
     }
 
-    .player-container {
+        .player-container {
       background: var(--container-gradient, linear-gradient(145deg, #14181f, #0d0f12));
-      padding: 12px 18px; /* 🔥 ΜΕΙΩΣΗ PADDING ΓΙΑ FLEXIBLE ΥΨΟΣ */
+      padding: 15px 20px; /* ↕️ Μειώσαμε το κενό πάνω-κάτω */
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       text-align: center;
-      width: 92%; /* 🔥 ΓΙΝΕΤΑΙ FLEXIBLE ΣΤΟ ΠΛΑΤΟΣ */
-      max-width: 335px; /* Απόλυτη εφαρμογή σε κινητά */
+      width: 92%; /* ↔️ Γίνεται flexible στο πλάτος του κινητού! */
+      max-width: 340px; /* Δεν θα ξεπεράσει ποτέ τις κανονικές διαστάσεις */
       border: 1px solid rgba(255, 255, 255, 0.05);
+      box-sizing: border-box;
     }
 
-    .video-display-area {
-      width: 100%;
-      height: 160px; /* 🔥 ΜΕΙΩΣΗ ΥΨΟΥΣ ΒΙΝΤΕΟ ΣΤΑ 160px ΓΙΑ ΝΑ ΧΩΡΑΕΙ ΠΑΝΤΟΥ */
+
+
+    /* 📱  */
+    .player-card {
       position: relative;
-      margin-bottom: 8px;
-      border-radius: 10px;
+      z-index: 3;
+      width: 100%;
+      max-width: 380px;
+      height: 100%;
+      background: linear-gradient(160deg, #0b132b 0%, #1c2541 100%); /* */
+      border: 2px solid #00d2ff; /* */
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9),
+                  0 0 20px rgba(0, 210, 255, 0.6),
+                  inset 0 0 10px rgba(0, 210, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
       overflow: hidden;
-      background: transparent;
-      z-index: 1;
     }
 
-    #bg-video {
+    /* */
+    .instagram-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding: 4px 10px;
+      background: rgba(0, 210, 255, 0.08);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 210, 255, 0.25);
+    }
+
+    .instagram-channel {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /*  */
+    .cyan-glow-text {
+      color: #ffffff;
+      text-shadow: 0 0 6px #00d2ff, 0 0 12px #00d2ff;
+    }
+
+    .instagram-icon {
+      width: 22px;
+      height: 22px;
+      background: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: -2px -2px 6px #00d2ff, 2px 2px 6px #3a86ff;
+      font-size: 11px;
+      color: #fff;
+    }
+
+    /*  */
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #00d2ff;
+    }
+
+    .live-tag {
+      background: linear-gradient(45deg, #00d2ff, #3a86ff);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 8px rgba(0, 210, 255, 0.8);
+    }
+
+    /*  */
+    .song-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 210, 255, 0.2);
+    }
+
+    .song-info-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .custom-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #00d2ff;
+      box-shadow: 0 0 6px rgba(0, 210, 255, 0.6);
+    }
+
+    .song-info h2 {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .song-info p {
+      font-size: 10px;
+      color: #8da9c4;
+      font-weight: 500;
+    }
+
+    /* 📊  */
+    .eq-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 16px;
+    }
+
+    .eq-bar {
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to top, #3a86ff, #00d2ff);
+      border-radius: 3px;
+      transform-origin: bottom;
+      transform: scaleY(0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .eq-container.playing .eq-bar:nth-child(1) { animation: eqBounce 0.6s infinite alternate ease-in-out; }
+    .eq-container.playing .eq-bar:nth-child(2) { animation: eqBounce 0.4s infinite alternate ease-in-out 0.1s; }
+    .eq-container.playing .eq-bar:nth-child(3) { animation: eqBounce 0.7s infinite alternate ease-in-out 0.2s; }
+    .eq-container.playing .eq-bar:nth-child(4) { animation: eqBounce 0.5s infinite alternate ease-in-out 0.15s; }
+    .eq-container.playing .eq-bar:nth-child(5) { animation: eqBounce 0.8s infinite alternate ease-in-out 0.05s; }
+
+    @keyframes eqBounce {
+      0% { transform: scaleY(0.15); }
+      100% { transform: scaleY(1); }
+    }
+
+    /* 🕒 */
+    .datetime-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .time-display {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 0 6px #00d2ff;
+      font-family: monospace;
+    }
+
+    .date-display {
+      font-size: 9px;
+      color: #8da9c4;
+    }
+
+       /* 🎬  */
+    .video-display-area {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      min-height: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 4px 0 8px 0;
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+      background: #050508;
+    }
+
+    .video-display-area video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    #mp3-cover-box {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-size: cover;
-      background-position: center;
-      display: none;
-      z-index: 2;
+
+    /* Controls บาร์ควบคุม */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(11, 19, 43, 0.85);
+      padding: 8px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 210, 255, 0.3);
     }
 
-    /* 🔊 Στυλ για τα Κλασικά Μεγάλα Κουμπιά */
-    .control-btn {
-      background: none;
-      border: 2px solid var(--text-color);
-      color: var(--text-color);
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 16px;
+    .progress-bar-container {
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
+      gap: 8px;
+      font-size: 10px;
+      color: #8da9c4;
     }
 
-    /* ⚡ Στυλ για το Κεντρικό Κυκλικό Κουμπί Play (Συγχρονισμένο με το CSS σας) */
+    .progress-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 5px;
+      accent-color: #00d2ff;
+      cursor: pointer;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 8px;
+    }
+
     .btn-control {
-      background: #14181f;
-      border: 2px solid #00ffcc;
-      color: #00ffcc;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+      background: none;
+      border: none;
+      color: #d1d5db;
+      font-size: 16px;
       cursor: pointer;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px rgba(0, 255, 204, 0.4), inset 0 0 10px rgba(0, 255, 204, 0.2);
-      transition: all 0.3s ease;
+      transition: 0.2s;
     }
 
     .btn-control:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
+      color: #00d2ff;
+      transform: scale(1.15);
+      text-shadow: 0 0 8px #00d2ff;
     }
+
+    .btn-play {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(45deg, #00d2ff, #3a86ff);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 210, 255, 0.6);
+    }
+
+    .btn-play:hover {
+      transform: scale(1.08);
+      box-shadow: 0 4px 18px rgba(0, 210, 255, 0.9);
+    }
+#open-chat-btn { 
+    color: #00ffcc !important; 
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.8); 
+    transition: all 0.3s ease;
+}
+#open-chat-btn:hover { 
+    color: #ffffff !important;
+    text-shadow: 0 0 15px #00ffcc;
+    transform: scale(1.1); 
+}
+
   </style>
 </head>
 <body>
@@ -172,55 +386,50 @@
       </div>
     </div>
 
-    <!-- 🎬  -->
-        <div class="video-display-area" style="position: relative;">
-      <!-- 1. Προσθέτουμε το poster="..." με το λινκ της φωτογραφίας σας -->
-      <video id="bg-video" autoplay loop muted playsinline poster="https://xatimg.com/image/wN0GwHPQejWO.png" style="width: 100%; height: 100%; object-fit: cover;"></video>
- 
-<div id="mp3-cover-box" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; background-size: cover; background-position: center; display: none; z-index: 2;"></div>
-     
-      <!-- 2. ΤΟ ΜΙΚΡΟ ΚΟΥΜΠΑΚΙ ΗΧΟΥ ΣΤΗΝ ΠΑΝΩ ΑΡΙΣΤΕΡΗ ΓΩΝΙΑ -->
-      <button id="video-mute-btn" onclick="toggleVideoSound()" style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.6); color: #00ffcc; border: 1px solid #00ffcc; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; font-size: 14px; transition: all 0.2s;"><i id="video-mute-icon" class="fas fa-volume-mute"></i></button>
-   
+      <!-- Περιοχή Οθόνης (Βίντεο, Λίστα, Chat) -->
+  <div class="video-display-area" style="width: 100%; height: 165px; position: relative; margin-bottom: 10px; border-radius: 10px; overflow: hidden; background: transparent; z-index: 1;">
+    <video id="bg-video" autoplay loop muted playsinline poster="https://xatimg.com/image/wN0GwHPQejWO.png" style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+    
+    <div id="mp3-cover-box" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; background-size: cover; background-position: center; display: none; z-index: 2;"></div>
+    
+    <button id="video-mute-btn" onclick="toggleVideoSound()" style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.6); color: #00ffcc; border: 1px solid #00ffcc; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; font-size: 14px;"><i id="video-mute-icon" class="fas fa-volume-mute"></i></button>
 
-
-<!-- ΤΟ ΚΡΥΦΟ ΠΛΑΙΣΙΟ ΤΟΥ CHAT ΜΕ ΑΔΕΙΑ ΜΙΚΡΟΦΩΝΟΥ 🎙️ -->
-        <iframe id="embedded-chat" src="//choises.github.io/q/p" allow="microphone; microphone *" scrolling="no" style="display: block; width: 100%; height: 100%; min-height: 220px; max-height: 100%; border: none; border-radius: 10px; background: transparent; overflow: hidden; box-sizing: border-box; position: absolute; top: 0; left: 0; z-index: 3; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;"></iframe>
-
- </div>
-                 <!-- 🎶 ΟΛΟΚΛΗΡΩΜΕΝΟ ΗΜΙΔΙΑΦΑΝΟ ΠΛΑΙΣΙΟ ΛΙΣΤΑΣ (GLASS EFFECT) -->
-    <div id="embedded-playlist" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; border-radius: 10px; background: rgba(20, 24, 31, 0.0) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-sizing: border-box; padding: 15px; overflow-y: auto; z-index: 999999 !important; border: 1px solid rgba(255, 255, 255, 0.08); pointer-events: auto;">
-
-           <!-- Ο ΤΙΤΛΟΣ ΜΑΖΙ ΜΕ ΤΟ ΚΟΚΚΙΝΟ ΚΟΥΜΠΙ ΚΛΕΙΣΙΜΑΤΟΣ (X) -->
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2c3545; padding-bottom: 5px; margin-bottom: 15px;">
+    <!-- 🎶 ΤΟ ΕΝΙΣΧΥΜΕΝΟ ΗΜΙΔΙΑΦΑΝΟ ΠΛΑΙΣΙΟ ΤΗΣ ΛΙΣΤΑΣ -->
+    <div id="embedded-playlist" style="display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; border-radius: 10px; background: rgba(20, 24, 31, 0.75) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-sizing: border-box; padding: 15px; overflow-y: auto; z-index: 999999 !important; border: 1px solid rgba(255, 255, 255, 0.08); pointer-events: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2c3545; padding-bottom: 5px; margin-bottom: 15px; position: relative; z-index: 100000; pointer-events: auto;">
         <span style="color: #00ffcc; font-size: 16px; font-weight: bold;">🎵 Λίστα Τραγουδιών</span>
-        <button onclick="closePlaylistAndReturn()" style="background: #c0392b; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold;">X</button>
-
+        <button onclick="closePlaylistAndReturn()" style="background: #c0392b; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; position: relative; z-index: 100001; pointer-events: auto;">X</button>
       </div>
-
       
-           <!-- Τα τραγούδια της λίστας συνδεδεμένα με τον μηχανισμό on-demand -->
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <button class="playlist-item-btn" onclick="playOnDemand(0)" style="background: #1e2530; color: #fff; border: 1px solid #2c3545; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 13px; font-weight: bold; width: 100%; transition: background 0.2s;">🎵 Τραγούδι 1 - Καλλιτέχνης 1 (MP3)</button>
-        <button class="playlist-item-btn" onclick="playOnDemand(1)" style="background: #1e2530; color: #fff; border: 1px solid #2c3545; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 13px; font-weight: bold; width: 100%; transition: background 0.2s;">🎵 Τραγούδι 2 - Καλλιτέχνης 2 (MP3)</button>
-        <button class="playlist-item-btn" onclick="playOnDemand(2)" style="background: #1e2530; color: #fff; border: 1px solid #2c3545; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 13px; font-weight: bold; width: 100%; transition: background 0.2s;">🎬 Βίντεο Κλιπ Δοκιμή (MP4)</button>
+      <div style="display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 100000; pointer-events: auto;">
+        <button onclick="playOnDemand(0)" style="background: #1e2530; color: #fff; border: 1px solid #2c3545; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 13px; font-weight: bold; width: 100%; position: relative; z-index: 100002; pointer-events: auto;">🎵 Τραγούδι 1 - Καλλιτέχνης 1 (MP3)</button>
+        <button onclick="playOnDemand(1)" style="background: #1e2530; color: #fff; border: 1px solid #2c3545; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 13px; font-weight: bold; width: 100%; position: relative; z-index: 100003; pointer-events: auto;">🎵 Τραγούδι 2 - Καλλιτέχνης 2 (MP3)</button>
+        <button onclick="playOnDemand(2)" style="background: #1e2530; color: #fff; border: 1px solid #2c3545; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; font-size: 13px; font-weight: bold; width: 100%; position: relative; z-index: 100004; pointer-events: auto;">🎬 Βίντεο Κλιπ Δοκιμή (MP4)</button>
       </div>
-
     </div>
 
-    <!-- Controls -->
-    <div class="controls">
-      
-<!-- ΝΕΑ ΜΠΑΡΑ ΕΝΤΑΣΗΣ ΗΧΟΥ 🔊 -->
-<div class="volume-container" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0;">
+    <!-- 💬 ΤΟ ΕΜΦΥΤΕΥΜΕΝΟ ΤΣΑΤ -->
+    <iframe id="embedded-chat" src="//choises.github.io/q/p" allow="microphone; microphone *" scrolling="no" style="display: none; width: 100%; height: 100%; min-height: 220px; max-height: 100%; border: none; border-radius: 10px; background: transparent; overflow: hidden; box-sizing: border-box; position: absolute; top: 0; left: 0; z-index: 3;"></iframe>
+  </div>
+
+  <div class="meta-info">
+    <h2 id="song-title" style="margin: 4px 0 2px 0; font-size: 20px; letter-spacing: 1px;">📻 Panagiotis Live</h2>
+    <p id="artist-name" style="margin: 0 0 10px 0; color: var(--text-muted); font-size: 13px;">PM Panagiotis & PJ Lady Punk</p>
+  </div>
+
+  <div class="time-display" style="font-family: monospace; font-size: 16px; color: var(--accent-color); margin-bottom: 10px;">
+    <span id="clock-time">00:00:00</span> | <span id="clock-date">01/01/2026</span>
+  </div>
+
+  <!-- ΜΠΑΡΑ ΕΝΤΑΣΗΣ ΗΧΟΥ -->
+  <div class="volume-container" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 10px 0;">
     <i class="fas fa-volume-down" style="color: #00ffcc; text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);"></i>
-    <!-- value="0.5" σημαίνει έναρξη ακριβώς στο 50% -->
     <input type="range" id="volume-bar" min="0" max="1" step="0.01" value="0.5" style="width: 100px; accent-color: #00ffcc; cursor: pointer;">
     <i class="fas fa-volume-up" style="color: #00ffcc; text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);"></i>
-</div>
+  </div>
 
-            <!-- ΚΟΥΜΠΙΑ ΕΛΕΓΧΟΥ: ΜΟΝΟΡΟΦΗ ΔΙΑΤΑΞΗ ΜΕ ΤΑ ΧΡΩΜΑΤΑ ΑΝΑΜΕΣΑ ΣΕ PLAY ΚΑΙ CHAT -->
-      <div class="buttons" style="position: relative; display: flex; justify-content: center; align-items: center; margin: -15px auto; width: 100%; min-height: 0px;">
+  <!-- ΚΟΥΜΠΙΑ ΕΛΕΓΧΟΥ: ΜΟΝΟΡΟΦΗ ΔΙΑΤΑΞΗ ΜΕ ΤΑ ΧΡΩΜΑΤΑ -->
+  <div class="buttons" style="position: relative; display: flex; justify-content: center; align-items: center; margin: -15px auto; width: 100%; min-height: 0px;">
         
 <button class="control-btn" id="prev-track" onclick="togglePlaylistView()" title="Λίστα Τραγουδιών" style="position: absolute; left: 10px; border: none; background: none; color: #00ffcc; text-shadow: 0 0 10px rgba(0, 255, 204, 0.8); cursor: pointer;"><i class="fas fa-list" style="font-size: 20px;"></i></button>
 
@@ -245,6 +454,7 @@
           <button onclick="changePlayerTheme('linear-gradient(135deg, #1a0010 0%, #3a0024 100%)', 'linear-gradient(145deg, #ff00a0 0%, #ff0066 60%, #a60042 100%)')" title="Cyber Pink" style="background: linear-gradient(135deg, #ff00a0, #ff0066); border: 1px solid #ffffff; width: 15px; height: 15px; border-radius: 50%; cursor: pointer; padding: 0; transition: transform 0.2s; box-shadow: 0 0 6px rgba(255, 0, 102, 0.6);"></button>
         
         </div>
+
 
   <audio id="audio-player"></audio>
 
