@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
+     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -25,40 +25,19 @@
 
     html, body {
       width: 100%;
-      height: auto !important;
+      height: 100%;
       overflow: hidden;
       background: transparent !important;
     }
-:root {
-      --bg-gradient: linear-gradient(135deg, #0d0f12 0%, #1c222b 100%);
-      --container-gradient: linear-gradient(145deg, #14181f, #0d0f12);
-      --accent-color: #00ffcc;
-      --text-color: #ffffff;
-      --text-muted: #8a99ad;
-    }
-        body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg-gradient, linear-gradient(135deg, #0d0f12 0%, #1c222b 100%)); /* 🔥 Σύνδεση με τη JS */
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text-color);
+
+    body {
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
+      padding: 6px;
+      position: relative;
     }
-
-    .player-container {
-      background: var(--container-gradient, linear-gradient(145deg, #14181f, #0d0f12)); /* 🔥 Σύνδεση με τη JS */
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      text-align: center;
-      width: 350px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
 
     /* 📱  */
     .player-card {
@@ -66,7 +45,7 @@
       z-index: 3;
       width: 100%;
       max-width: 380px;
-      height: auto !important;
+      height: 100%;
       background: linear-gradient(160deg, #0b132b 0%, #1c2541 100%); /* */
       border: 2px solid #00d2ff; /* */
       border-radius: 20px;
@@ -78,7 +57,6 @@
       padding: 10px;
       overflow: hidden;
     }
-
     /* */
     .instagram-badge {
       display: flex;
